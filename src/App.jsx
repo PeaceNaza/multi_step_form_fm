@@ -1,14 +1,17 @@
 import "@mantine/core/styles.css";
 import "@mantine/nprogress/styles.css";
 import { MantineProvider } from "@mantine/core";
+import { Container } from "@mantine/core";
+import Personal from "./components/Personal";
 
 const App = () => {
   return (
     <MantineProvider>
-    <div className='text-red-600 text-5xl'>App</div>
+     <Container>
+      <Personal />
+     </Container>
     </MantineProvider>
-  )
-}
+  );
+};
 
-export default App
-
+export default App;
