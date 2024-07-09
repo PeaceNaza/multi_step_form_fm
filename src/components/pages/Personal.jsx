@@ -47,7 +47,7 @@ const Personal = () => {
             {" "}
             Personal info{" "}
           </Title>
-          <Text size="xs" c="hsl(231, 11%, 63%)">
+          <Text size="sm" c="hsl(231, 11%, 63%)">
             {" "}
             Please provide your name, email address, and phone number.
           </Text>
@@ -61,6 +61,7 @@ const Personal = () => {
                 onChange={(event) =>
                   setData({ ...data, [input.label.toLowerCase()]: event.currentTarget.value })
                 }
+                error={input.required ? "This field is required" : null}
                 required
               />
             ))}

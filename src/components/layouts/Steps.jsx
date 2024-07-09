@@ -11,7 +11,7 @@ const Steps = () => {
   ];
 
   return (
-    <Box miw="30%" className="sidebar rounded-md">
+    <Box miw="30%" mih="75vh" className="sidebar rounded-md">
       <Flex direction="column" gap={20} p={20}>
         {steps.map((step, index) => (
           <Group mt={10} key={index} justify="flex-start" className="rounded-md">
