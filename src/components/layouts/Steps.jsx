@@ -8,11 +8,12 @@ const Steps = () => {
     { title: "STEP 2", description: "SELECT PLAN", button: 2 },
     { title: "STEP 3", description: "ADD-ONS", button: 3 },
     { title: "STEP 4", description: "SUMMARY", button: 4 },
-  ];
+  ]; 
 
   return (
     <Box miw="30%" mih="75vh" className="sidebar rounded-md">
       <Flex direction="column" gap={20} p={20}>
+
         {steps.map((step, index) => (
           <Group mt={10} key={index} justify="flex-start" className="rounded-md">
             <Button variant="secondary">{step.button}</Button>

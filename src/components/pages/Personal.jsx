@@ -4,7 +4,7 @@ import Steps from "../layouts/Steps";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Personal = () => {
+const Personal = ({formData, setFormData}) => {
   const navigate = useNavigate();
 
   const textInput = [
@@ -13,11 +13,7 @@ const Personal = () => {
     { label: "Phone Number", placeholder: "e.g. +1 234 567 890" },
   ];
 
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const [data, setData] = useState(0);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +37,7 @@ const Personal = () => {
         gap={50}
       >
         <Steps />
-
+        { data === 0 && (
         <form className="mt-10" onSubmit={handleSubmit}>
           <Title order={2} ff="Ubuntu">
             {" "}
@@ -72,6 +68,7 @@ const Personal = () => {
             </Button>
           </Group>
         </form>
+        )}
       </Flex>
     </Container>
   );

@@ -2,9 +2,8 @@ import "@mantine/core/styles.css";
 import "@mantine/nprogress/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { Container } from "@mantine/core";
-import Personal from "./components/pages/Personal";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SelectPlan from "./components/pages/SelectPlan";
+import Form from "./components/layouts/Form";
 
 const App = () => {
   return (
@@ -12,8 +11,7 @@ const App = () => {
       <Container fluid className="px-5 md:px-20">
         <Router>
           <Routes>
-            <Route path="/" element={<Personal />} />
-            <Route path="/select-plan" element={<SelectPlan />} />
+            <Route path="/" element={<Form />} />
           </Routes>
         </Router>
       </Container>
