@@ -11,13 +11,17 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@mantine/core": "^7.11.1",
     "@mantine/form": "^7.11.1",
     "@mantine/hooks": "^7.11.1",
     "@mantine/nprogress": "^7.11.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.1"
+    "react-hook-form": "^7.52.1",
+    "react-router-dom": "^6.24.1",
+    "yup": "^1.4.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

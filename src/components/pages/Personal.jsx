@@ -1,76 +1,80 @@
-import { Container, TextInput, Group, Title, Text, Flex } from "@mantine/core";
-import Button from "../layouts/Buttons";
-import Steps from "../layouts/Steps";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable react/prop-types */
 
-const Personal = ({formData, setFormData}) => {
+import { Box, TextInput, Group, Title, Text } from "@mantine/core";
+import Button from "../layouts/Buttons";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  name: yup.string().required("This field is required"),
+  email: yup.string().email("Invalid email").required("This field is required"),
+  phone: yup
+    .number()
+    .typeError("Phone number must be a number")
+    .positive("Phone number must be positive")
+    .required("This field is required"),
+});
+
+const Personal = () => {
   const navigate = useNavigate();
 
-  const textInput = [
-    { label: "Name", placeholder: "e.g. Stephen King" },
-    { label: "Email Address", placeholder: "e.g. stephenking@lorem.com" },
-    { label: "Phone Number", placeholder: "e.g. +1 234 567 890" },
-  ];
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const [data, setData] = useState(0);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Submitted: ", data);
+  const submitForm = (data, e) => {
+    e.preventDefault();
+    console.log(data);
     navigate("/select-plan");
   };
 
   return (
-    <Container
-      size="75%"
-      mt={90}
-      h={{ base: "", md: "80vh" }}
-      bg="hsl(0, 0%, 100%)"
-      className="rounded-md shadow"
-    >
-      <Flex
-        justify="flex-start"
-        pt={15}
-        direction={{ base: "column", md: "row", xs: "column" }}
-        wrap="wrap"
-        gap={50}
-      >
-        <Steps />
-        { data === 0 && (
-        <form className="mt-10" onSubmit={handleSubmit}>
-          <Title order={2} ff="Ubuntu">
-            {" "}
-            Personal info{" "}
-          </Title>
-          <Text size="sm" c="hsl(231, 11%, 63%)">
-            {" "}
-            Please provide your name, email address, and phone number.
-          </Text>
-          <Flex direction="column" gap={20} mt={20}>
-            {textInput.map((input, index) => (
-              <TextInput
-                key={index}
-                label={input.label}
-                placeholder={input.placeholder}
-                value={data[input.label.toLowerCase()]}
-                onChange={(event) =>
-                  setData({ ...data, [input.label.toLowerCase()]: event.currentTarget.value })
-                }
-                error={input.required ? "This field is required" : null}
-                required
-              />
-            ))}
-          </Flex>
-          <Group justify="flex-end" mt={50}>
-            <Button onClick={handleSubmit} variant="primary">
-              Next Step
-            </Button>
-          </Group>
-        </form>
-        )}
-      </Flex>
-    </Container>
+    <Box mt={30}>
+      <Title order={2} ff="Ubuntu">
+        {" "}
+        Personal info{" "}
+      </Title>
+      <Text size="sm" c="hsl(231, 11%, 63%)">
+        {" "}
+        Please provide your name, email address, and phone number.
+      </Text>
+      <form className="mt-5" onSubmit={handleSubmit(submitForm)}>
+        <TextInput
+          my={10}
+          label="Name"
+          placeholder="e.g. Stephen King"
+          ref={register}
+          {...register("name")}
+          error={errors.name?.message}
+        />
+
+        <TextInput
+          my={10}
+          label="Email Address"
+          placeholder="e.g. stephenking@lorem.com"
+          {...register("email")}
+          error={errors.email?.message}
+        />
+
+        <TextInput
+          my={10}
+          label="Phone Number"
+          placeholder="e.g. +1 234 567 890"
+          {...register("phone")}
+          error={errors.phone?.message}
+        />
+
+        <Group justify="flex-end" mt={50}>
+          <Button variant="primary">Next step</Button>
+        </Group>
+      </form>
+    </Box>
   );
 };
 
