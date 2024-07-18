@@ -1,13 +1,13 @@
 import { Box, Flex, Text, Title, Container, Checkbox, Group } from "@mantine/core";
-import Steps from "../layouts/Steps";
 import Button from "../layouts/Buttons";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import useFormStore from "../formStore";
+import { useEffect } from "react";
 
 const PickAdd = () => {
   const navigate = useNavigate();
 
-  const [selectedAddOns, setSelectedAddOns] = useState([]);
+  const { selectedAddOns, setSelectedAddOns, setCurrentStep } = useFormStore();
 
   const pickAddOns = [
     {
@@ -30,29 +30,30 @@ const PickAdd = () => {
     },
   ];
 
+  useEffect(() => {
+    setCurrentStep(3);
+  }, [setCurrentStep]); 
+  
   const handleSelectedAddOns = (id) => {
     if (selectedAddOns.includes(id)) {
       setSelectedAddOns(selectedAddOns.filter((item) => item !== id));
+      console.log(
+        "Deleted:",
+        pickAddOns.find((item) => item.id === id),
+      );
     } else {
       setSelectedAddOns([...selectedAddOns, id]);
+      console.log(
+        "Added:",
+        pickAddOns.find((item) => item.id === id),
+      );
     }
   };
 
   return (
-    <>
-      <Container mt={50} h={{ md: "85vh" }} bg="hsl(0, 0%, 100%)" className="rounded-md shadow">
-        <Flex
-          align="center"
-          justify="flex-start"
-          pt={15}
-          direction={{ base: "column", md: "row" }}
-          wrap="wrap"
-          gap={50}
-        >
-          <Box w="25%">
-            <Steps step={3} />
-          </Box>
-          <Box w="60%">
+  
+    
+          <Box>
             <Title>Pick add-ons </Title>
             <Text size="sm">Add-ons help enhance your gaming experience.</Text>
             {pickAddOns.map((addOn) => {
@@ -100,9 +101,7 @@ const PickAdd = () => {
               </Button>
             </Group>
           </Box>
-        </Flex>
-      </Container>
-    </>
+     
   );
 };
 

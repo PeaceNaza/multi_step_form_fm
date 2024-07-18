@@ -5,28 +5,28 @@ const useFormStore = create(
   devtools(
     persist(
       (set) => ({
-        formData: {
-          step: 1,
-          name: "",
-          email: "",
-          phone: "",
-          plan: "arcade",
-          planType: "monthly",
-          addons: [],
-        },
-
-        setFormData: (newData) => set((state) => ({ formData: { ...state.formData, ...newData } })),
-
-        page: 0,
-        setPage: (newPage) => set({ page: newPage }),
-
-        error: {
+        personalInfo: {
           name: "",
           email: "",
           phone: "",
         },
-        setError: (newError) => set((state) => ({ error: { ...state.error, ...newError } })),
+
+        setPersonalInfo: (info) => set({ personalInfo: info }),
+
+        selectedPlan: 0,
+
+        yearlyPlan: false,
+        setSelectedPlan: (index) => set({ selectedPlan: index }),
+
+        setYearlyPlan: (value) => set({ yearlyPlan: value }),
+
+        selectedAddOns: [],
+        setSelectedAddOns: (addOns) => set({ selectedAddOns: addOns }),
+
+        currentStep: 1,
+        setCurrentStep: (step) => set({ currentStep: step }),
       }),
+
       {
         name: "form-storage",
         storage: localStorage,

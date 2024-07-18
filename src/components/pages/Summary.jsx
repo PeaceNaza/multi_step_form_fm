@@ -1,62 +1,126 @@
-import React from "react";
 import { Container, Flex, Box, Title, Text, Anchor, Group } from "@mantine/core";
 import Steps from "../layouts/Steps";
 import Button from "../layouts/Buttons";
 import { useNavigate } from "react-router-dom";
-import Finished from "./Finished";
+import useFormStore from "../formStore";
+import { useEffect } from "react";
+
 
 const Summary = () => {
   const navigate = useNavigate();
 
-  return (
-    <Container mt={50} h={{ md: "85vh" }} bg="hsl(0, 0%, 100%)" className="rounded-md shadow">
-      <Flex
-        align="center"
-        justify="flex-start"
-        pt={15}
-        direction={{ base: "column", md: "row" }}
-        wrap="wrap"
-        gap={50}
-      >
-        <Box w="28%">
-          <Steps />
-        </Box>
+  const finish = () => {
+    if (window.confirm("are you sure you want to submit?")) {
+    navigate("/finished");
+  }}
 
-        <Box w="60%">
+  const { selectedPlan, setSelectedPlan, selectedAddOns, yearlyPlan, setYearlyPlan, setCurrentStep } =
+    useFormStore();
+
+  const plans = [
+    {
+      id: 1,
+      name: "Arcade",
+      month: "$9/mo",
+      year: "$90/yr",
+    },
+    {
+      id: 2,
+      name: "Advanced",
+      month: "$12/mo",
+      year: "$120/yr",
+    },
+    {
+      id: 3,
+      name: "Pro",
+      month: "$15/mo",
+      year: "$150/yr",
+    },
+  ];
+
+  const addOns = [
+    {
+      id: 1,
+      title: "Online service",
+      description: "Access to multiplayer games",
+      price: "+$1/mo",
+    },
+    {
+      id: 2,
+      title: "Larger storage",
+      description: "1TB of cloud save",
+      price: "+$2/mo",
+    },
+    {
+      id: 3,
+      title: "Custom profile",
+      description: "Custom theme on your profile",
+      price: "+$2/mo",
+    },
+  ];
+
+  useEffect(() => {
+    setCurrentStep(4);
+  }, [setCurrentStep]);
+
+  const planDetails = plans[selectedPlan];
+  const addOnDetails = addOns.filter((addOn) => selectedAddOns.includes(addOn.id));
+
+  const toggleChange = () => {
+    setYearlyPlan(!yearlyPlan);
+    setSelectedPlan(selectedPlan);
+  };
+
+  const totalAmount = addOnDetails.reduce((acc, addOn) => {
+    return acc + parseInt(addOn.price.replace("$", ""));
+  }, parseInt(yearlyPlan ? planDetails.year.replace("$", "") : planDetails.month.replace("$", "")));
+
+  return (
+
+        <Box>
+
           <Title order={2} ff="Ubuntu">
             Finishing up
           </Title>
+
           <Text size="sm" c="hsl(231, 11%, 63%)">
             Double check everything looks OK before confirming.
           </Text>
 
           <Box mt={50} p={20} bg="hsl(217, 100%, 97%)" className="rounded-md shadow" my={20}>
             <Flex align="center" justify="space-between">
-              <Text>Plan</Text>
-              <Text>$10/mo</Text>
+              <Text>
+                {planDetails.name}({yearlyPlan ? "Yearly" : "Monthly"})
+              </Text>
+              <Text>{yearlyPlan ? planDetails.year : planDetails.month}</Text>
             </Flex>
-            <Anchor>Change</Anchor>
+            <Anchor onClick={toggleChange}>Change</Anchor>
             <hr />
-            <Flex align="center" justify="space-between">
-              <Text>Add-ons</Text>
-              <Text>$2/mo</Text>
-            </Flex>
+          
+             {addOnDetails.map((addOn, index) => (
+               <Flex  key={index} align="center" justify="space-between">
+                  <Text>
+                    {addOn.title} 
+                  </Text>
+                   <Text>{addOn.price}</Text>
+                </Flex>
+              ))}
+             
           </Box>
           <Group justify="space-between">
-            <Text>Total(monthly)</Text>
-            <Text>$12/mo</Text>
+            <Text>{yearlyPlan ? "Total (per year)" : "Total (per month)"}</Text>
+            <Text>${totalAmount}</Text>
           </Group>
           <Group justify="space-between" mt={50}>
             <Button variant="tertiary" onClick={() => navigate(-1)}>
               Go Back
             </Button>
-            <Button variant="primary" onClick={() => navigate("/finished")}>
+            <Button variant="primary" onClick={finish}>
               Finish
             </Button>
           </Group>
         </Box>
-      </Flex>
-    </Container>
+     
   );
 };
 

@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 
-const Button = ({ children, variant, onClick }) => {
+
+  const Button = ({ children, variant, onClick, isActive }) => {
   const baseStyle = "text-white text-xs rounded";
 
   const variantStyle = {
     primary: "bg-primary-100 hover:bg-opacity-90 text-white px-3 py-2",
     secondary:
-      "bg-primary-200 border hover:bg-primary-400 hover:text-primary-100 rounded-[50%] px-3 py-2",
+      ` rounded-[50%] font-semibold px-3 py-2 text-xs ${isActive ? " bg-primary-400 text-primary-100" : 'bg-primary-200 border'}`,
     tertiary:
       "bg-secondary-300 text-secondary-200  hover:text-primary-100 rounded px-3 py-2 font-bold",
     success: "bg-green-500 hover:bg-green-700",

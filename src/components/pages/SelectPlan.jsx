@@ -1,16 +1,15 @@
 import { Text, Group, Grid, Box, Flex, Container, Title, Image, Switch } from "@mantine/core";
 import Button from "../layouts/Buttons";
-import Steps from "../layouts/Steps";
 import { useNavigate } from "react-router-dom";
 import arcade from "../../assets/images/icon-arcade.svg";
 import advance from "../../assets/images/icon-advanced.svg";
 import pro from "../../assets/images/icon-pro.svg";
-import { useState } from "react";
+import useFormStore from "../formStore";
+import { useEffect } from "react";
 
 const SelectPlan = () => {
   const navigate = useNavigate();
-  const [yearlyPlan, setYearlyPlan] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(0);
+  const { selectedPlan, setSelectedPlan, yearlyPlan, setYearlyPlan, setCurrentStep} = useFormStore();
 
   const plan = [
     {
@@ -38,30 +37,32 @@ const SelectPlan = () => {
       img: <Image src={pro} w={40} />,
     },
   ];
-
+  
+  useEffect(() => {
+    setCurrentStep(2);
+  }, [setCurrentStep]);
+  
   const handleYearlyPlan = () => {
     setYearlyPlan(!yearlyPlan);
   };
 
   const handleSelectedPlan = (index) => {
     setSelectedPlan(index);
+    console.log(selectedPlan);
+  };
+
+  const handleNextStep = () => {
+    if (selectedPlan >= 0) {
+      console.log("selected:", plan[selectedPlan]);
+      navigate("/pick-add");
+    }
   };
 
   return (
-    <Container mt={50} h={{ md: "85vh" }} bg="hsl(0, 0%, 100%)" className="rounded-md shadow">
-      <Flex
-        align="center"
-        justify="flex-start"
-        pt={15}
-        direction={{ base: "column", md: "row" }}
-        wrap="wrap"
-        gap={50}
-      >
-        <Box w="25%">
-          <Steps />
-        </Box>
 
-        <Box w="50%">
+        
+
+        <Box>
           <Title order={2} ff="Ubuntu">
             Select your plan
           </Title>
@@ -81,7 +82,7 @@ const SelectPlan = () => {
                 onClick={() => handleSelectedPlan(index)}
               >
                 {item.img}
-                <Text size="md" mt={10}>
+                <Text size="md" mt={10} name={item.name}>
                   {item.name}
                 </Text>
                 <Text size="xs" c="hsl(231, 11%, 63%)" className="leading-7">
@@ -94,11 +95,7 @@ const SelectPlan = () => {
 
           <Group justify="center" mt={20} className="bg-secondary-300 rounded-md">
             <Text>Monthly</Text>
-            <Switch
-              defaultChecke={yearlyPlan}
-              onChange={handleYearlyPlan}
-              color="hsl(206, 94%, 16%)"
-            />
+            <Switch checked={yearlyPlan} onChange={handleYearlyPlan} color="hsl(206, 94%, 16%)" />
             <Text>Yearly</Text>
           </Group>
 
@@ -106,13 +103,12 @@ const SelectPlan = () => {
             <Button variant="tertiary" onClick={() => navigate(-1)}>
               Go Back
             </Button>
-            <Button variant="primary" onClick={() => navigate("/pick-add")}>
+            <Button variant="primary" onClick={handleNextStep}>
               Next Step
             </Button>
           </Group>
         </Box>
-      </Flex>
-    </Container>
+     
   );
 };
 

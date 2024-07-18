@@ -4,20 +4,9 @@ import finished from "../../assets/images/icon-thank-you.svg";
 
 const Finished = () => {
   return (
-    <Container mt={50} h={{ md: "85vh" }} bg="hsl(0, 0%, 100%)" className="rounded-md shadow">
-      <Flex
-        align="center"
-        justify="flex-start"
-        pt={15}
-        direction={{ base: "column", md: "row" }}
-        wrap="wrap"
-        gap={50}
-      >
-        <Box w="30%">
-          <Steps />
-        </Box>
+   
 
-        <Box w="60%">
+        <Box>
           <Flex direction="column" align="center" justify="center" gap={20}>
             <Image src={finished} alt="finished" w={100} />
             <h1 className="text-2xl font-bold">Thank you! </h1>
@@ -27,8 +16,7 @@ const Finished = () => {
             </p>
           </Flex>
         </Box>
-      </Flex>
-    </Container>
+      
   );
 };
 
