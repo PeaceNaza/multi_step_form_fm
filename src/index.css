@@ -9,10 +9,13 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  background-color: hsl(217, 100%, 97%);
 }
 
 body {
   font-family: "Ubuntu", sans-serif;
+  font-size: 16px;
   margin: 0;
   place-items: center;
   min-width: 320px;
@@ -20,4 +23,5 @@ body {
   overflow-x: hidden;
   background-color: hsl(217, 100%, 97%);
   color: hsl(213, 96%, 18%);
+  position: relative;
 }

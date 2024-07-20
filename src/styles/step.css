@@ -3,4 +3,43 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  margin-left: -6px;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    background-image: url("../assets/images/bg-sidebar-mobile.svg");
+    background-size: cover;
+    background-position: top;
+    justify-content: center;
+    place-content: center;
+    align-items: center;
+    display: flex;
+  }
+}
+
+@media (max-width: 992px) {
+  .top {
+    position: absolute;
+    top: 105px;
+    left: 0;
+    right: 0;
+  }
+}
+
+input:focus {
+  border-color: hsl(243, 100%, 62%);
+}
+
+.toggle {
+  height: 18px !important;
+  width: 40px !important;
+}
+
+.toggle:hover {
+  opacity: 0.8;
+}
+
+.click:hover {
+  color: hsl(243, 100%, 62%) !important;
 }

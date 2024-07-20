@@ -4,18 +4,25 @@ import Button from "../layouts/Buttons";
 import { useNavigate } from "react-router-dom";
 import useFormStore from "../formStore";
 import { useEffect } from "react";
-
+import { useHover } from "@mantine/hooks";
 
 const Summary = () => {
   const navigate = useNavigate();
 
   const finish = () => {
     if (window.confirm("are you sure you want to submit?")) {
-    navigate("/finished");
-  }}
+      navigate("/finished");
+    }
+  };
 
-  const { selectedPlan, setSelectedPlan, selectedAddOns, yearlyPlan, setYearlyPlan, setCurrentStep } =
-    useFormStore();
+  const {
+    selectedPlan,
+    setSelectedPlan,
+    selectedAddOns,
+    yearlyPlan,
+    setYearlyPlan,
+    setCurrentStep,
+  } = useFormStore();
 
   const plans = [
     {
@@ -44,18 +51,21 @@ const Summary = () => {
       title: "Online service",
       description: "Access to multiplayer games",
       price: "+$1/mo",
+      year: "+$10/year",
     },
     {
       id: 2,
       title: "Larger storage",
       description: "1TB of cloud save",
       price: "+$2/mo",
+      year: "+$20/year",
     },
     {
       id: 3,
       title: "Custom profile",
       description: "Custom theme on your profile",
       price: "+$2/mo",
+      year: "+$20/year",
     },
   ];
 
@@ -71,56 +81,120 @@ const Summary = () => {
     setSelectedPlan(selectedPlan);
   };
 
-  const totalAmount = addOnDetails.reduce((acc, addOn) => {
-    return acc + parseInt(addOn.price.replace("$", ""));
-  }, parseInt(yearlyPlan ? planDetails.year.replace("$", "") : planDetails.month.replace("$", "")));
+  const totalAmount = addOnDetails.reduce(
+    (acc, addOn) => {
+      return acc + parseInt(addOn.price.replace("$", ""));
+    },
+    parseInt(yearlyPlan ? planDetails.year.replace("$", "") : planDetails.month.replace("$", "")),
+  );
 
   return (
+    <>
+      <Container
+        mt={{ base: 0, md: 50 }}
+        w={{ base: "90vw", md: "60vw" }}
+        h={{ md: "85vh" }}
+        bg="hsl(0, 0%, 100%)"
+        className="top  rounded-md shadow-md"
+      >
+        <Flex
+          align="flex-start"
+          justify="flex-start"
+          pt={15}
+          direction={{ base: "column", md: "row" }}
+          gap={{ base: 0, md: 20, lg: 70 }}
+        >
+          <Box display={{ base: "none", md: "block" }}>
+            <Steps />
+          </Box>
 
-        <Box>
+          <Box w={{ base: "97%", md: "57%" }} mt={{ base: 10, md: 23 }} mb={{ base: 25, md: 23 }}>
+            <Title order={2} ff="Ubuntu" mb={{ base: 8, md: 2 }} fw={700}>
+              Finishing up
+            </Title>
 
-          <Title order={2} ff="Ubuntu">
-            Finishing up
-          </Title>
+            <Text mb={25} c="hsl(231, 11%, 63%)" className="tracking-wider md:text-sm">
+              Double check everything looks OK before confirming.
+            </Text>
 
-          <Text size="sm" c="hsl(231, 11%, 63%)">
-            Double check everything looks OK before confirming.
-          </Text>
+            <Box
+              h={{ md: 180 }}
+              mt={10}
+              px={20}
+              py={15}
+              bg="hsl(217, 100%, 97%)"
+              className="rounded-md shadow"
+            >
+              <Flex align="center" justify="space-between">
+                <Text fw={500}>
+                  {planDetails.name}({yearlyPlan ? "Yearly" : "Monthly"})
+                </Text>
+                <Text fw={500}>{yearlyPlan ? planDetails.year : planDetails.month}</Text>
+              </Flex>
+              <Anchor
+                size="sm"
+                underline="always"
+                c="hsl(231, 11%, 63%)"
+                onClick={toggleChange}
+                className="click"
+              >
+                Change
+              </Anchor>
+              <hr className="my-4" />
 
-          <Box mt={50} p={20} bg="hsl(217, 100%, 97%)" className="rounded-md shadow" my={20}>
-            <Flex align="center" justify="space-between">
-              <Text>
-                {planDetails.name}({yearlyPlan ? "Yearly" : "Monthly"})
-              </Text>
-              <Text>{yearlyPlan ? planDetails.year : planDetails.month}</Text>
-            </Flex>
-            <Anchor onClick={toggleChange}>Change</Anchor>
-            <hr />
-          
-             {addOnDetails.map((addOn, index) => (
-               <Flex  key={index} align="center" justify="space-between">
-                  <Text>
-                    {addOn.title} 
+              {addOnDetails.map((addOn, index) => (
+                <Flex key={index} align="center" justify="space-between">
+                  <Text mb={8} size="sm" c="hsl(231, 11%, 63%)">
+                    {addOn.title}
                   </Text>
-                   <Text>{addOn.price}</Text>
+                  <Text size="sm">{addOn.price}</Text>
                 </Flex>
               ))}
-             
+            </Box>
+
+            <Group mt={18} mx={20} justify="space-between">
+              <Text size="sm" c="hsl(231, 11%, 63%)">
+                {yearlyPlan ? "Total (per year)" : "Total (per month)"}
+              </Text>
+              <Text size="sm" c="hsl(243, 100%, 62%)" fw={500}>
+                +${totalAmount}/{yearlyPlan ? "yr" : "mo"}
+              </Text>
+            </Group>
+
+            <Group
+              justify="space-between"
+              mt={{ md: 60, lg: 78 }}
+              display={{ base: "none", md: "flex" }}
+            >
+              <Button variant="tertiary" onClick={() => navigate(-1)}>
+                Go Back
+              </Button>
+              <Button variant="confirm" onClick={finish}>
+                Confirm
+              </Button>
+            </Group>
           </Box>
-          <Group justify="space-between">
-            <Text>{yearlyPlan ? "Total (per year)" : "Total (per month)"}</Text>
-            <Text>${totalAmount}</Text>
-          </Group>
-          <Group justify="space-between" mt={50}>
-            <Button variant="tertiary" onClick={() => navigate(-1)}>
-              Go Back
-            </Button>
-            <Button variant="primary" onClick={finish}>
-              Finish
-            </Button>
-          </Group>
-        </Box>
-     
+        </Flex>
+      </Container>
+
+      <Group
+        h="100%"
+        w="100vw"
+        py={{ base: 20, md: 0 }}
+        pr={{ base: 25, md: 0 }}
+        pl={{ base: 10, md: 0 }}
+        display={{ base: "flex", md: "none" }}
+        justify="space-between"
+        className="bg-secondary-500 mt-[31rem]"
+      >
+        <Button variant="tertiary" onClick={() => navigate(-1)}>
+          Go Back
+        </Button>
+        <Button variant="confirm" onClick={finish}>
+          Confirm
+        </Button>
+      </Group>
+    </>
   );
 };
 
