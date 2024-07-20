@@ -146,12 +146,12 @@ const Personal = () => {
 
       <form
         onSubmit={handleSubmit(submitForm)}
-       className="h-[100%] w-screen"
+       className="h-[100%] w-[100%]"
       >
         <Group
-         className=" bg-secondary-500 mt-[28rem]"
+         className=" bg-secondary-500 mt-[30rem]"
          h="100%"
-        w="100vw"
+         w="100vw"
           justify="flex-end"
           py={{ base: 23, md: 0 }}
           mr={{ base: 20, md: 0 }}
