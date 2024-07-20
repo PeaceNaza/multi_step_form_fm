@@ -8,7 +8,7 @@ import Steps from "../layouts/Steps";
 const PickAdd = () => {
   const navigate = useNavigate();
 
-  const { selectedAddOns, setSelectedAddOns, setCurrentStep } = useFormStore();
+  const { selectedAddOns, setSelectedAddOns, setCurrentStep, yearlyPlan } = useFormStore();
 
   const pickAddOns = [
     {
@@ -16,21 +16,21 @@ const PickAdd = () => {
       title: "Online service",
       description: "Access to multiplayer games",
       price: "+$1/mo",
-      year: "+$10/year",
+      year: "+$10/yr",
     },
     {
       id: 2,
       title: "Larger storage",
       description: "Extra 1TB of cloud save",
       price: "+$2/mo",
-      year: "+$20/year",
+      year: "+$20/yr",
     },
     {
       id: 3,
       title: "Customizable profile",
       description: "Custom theme on your profile",
       price: "+$2/mo",
-      year: "+$20/year",
+      year: "+$20/yr",
     },
   ];
 
@@ -112,7 +112,7 @@ const PickAdd = () => {
                     </Group>
 
                     <Text size="xs" c="hsl(243, 100%, 62%)">
-                      {addOn.price}
+                      {yearlyPlan ? addOn.year : addOn.price}
                     </Text>
                   </Flex>
                 </Box>

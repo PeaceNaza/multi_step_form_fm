@@ -4,13 +4,13 @@ import Button from "../layouts/Buttons";
 import { useNavigate } from "react-router-dom";
 import useFormStore from "../formStore";
 import { useEffect } from "react";
-import { useHover } from "@mantine/hooks";
+
 
 const Summary = () => {
   const navigate = useNavigate();
 
   const finish = () => {
-    if (window.confirm("are you sure you want to submit?")) {
+    if (window.confirm("Are you sure you want to submit?")) {
       navigate("/finished");
     }
   };
@@ -51,21 +51,21 @@ const Summary = () => {
       title: "Online service",
       description: "Access to multiplayer games",
       price: "+$1/mo",
-      year: "+$10/year",
+      yearly: "+$10/yr",
     },
     {
       id: 2,
       title: "Larger storage",
       description: "1TB of cloud save",
       price: "+$2/mo",
-      year: "+$20/year",
+      yearly: "+$20/yr",
     },
     {
       id: 3,
       title: "Custom profile",
       description: "Custom theme on your profile",
       price: "+$2/mo",
-      year: "+$20/year",
+      yearly: "+$20/yr",
     },
   ];
 
@@ -83,9 +83,10 @@ const Summary = () => {
 
   const totalAmount = addOnDetails.reduce(
     (acc, addOn) => {
-      return acc + parseInt(addOn.price.replace("$", ""));
+      const addOnPrice = yearlyPlan ? addOn.yearly : addOn.price;
+      return acc + parseInt(addOnPrice.replace("$", ""));
     },
-    parseInt(yearlyPlan ? planDetails.year.replace("$", "") : planDetails.month.replace("$", "")),
+    parseInt(yearlyPlan ? planDetails.year.replace("$", "") : planDetails.month.replace("$", "")), 
   );
 
   return (
@@ -147,7 +148,7 @@ const Summary = () => {
                   <Text mb={8} size="sm" c="hsl(231, 11%, 63%)">
                     {addOn.title}
                   </Text>
-                  <Text size="sm">{addOn.price}</Text>
+                  <Text size="sm">{yearlyPlan ? addOn.yearly : addOn.price}</Text>
                 </Flex>
               ))}
             </Box>
