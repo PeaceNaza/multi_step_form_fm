@@ -146,9 +146,10 @@ const Personal = () => {
 
       <form
         onSubmit={handleSubmit(submitForm)}
-        className="buttom bg-secondary-500 w-screen h-[100%] mt-[27rem]"
+       
       >
         <Group
+         className=" bg-secondary-500 w-screen h-[100%] mt-[27rem]"
           justify="flex-end"
           py={{ base: 23, md: 0 }}
           mr={{ base: 20, md: 0 }}
