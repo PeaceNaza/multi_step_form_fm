@@ -154,7 +154,7 @@ const Personal = () => {
          w="100vw"
           justify="flex-end"
           py={{ base: 23, md: 0 }}
-          mr={{ base: 20, md: 0 }}
+          mr={{ base: 22, md: 0 }}
           display={{ base: "flex", md: "none" }}
         >
           <Button variant="primary">Next step</Button>
