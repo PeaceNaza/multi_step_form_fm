@@ -149,7 +149,9 @@ const Personal = () => {
        className="h-[100%] w-screen"
       >
         <Group
-         className=" bg-secondary-500 w-screen h-[100%] mt-[27rem]"
+         className=" bg-secondary-500 mt-[28rem]"
+         h="100%"
+        w="100vw"
           justify="flex-end"
           py={{ base: 23, md: 0 }}
           mr={{ base: 20, md: 0 }}
