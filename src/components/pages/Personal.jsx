@@ -146,7 +146,7 @@ const Personal = () => {
 
       <form
         onSubmit={handleSubmit(submitForm)}
-       className="h-[100%] w-[100%]"
+       
       >
         <Group
          className=" bg-secondary-500 mt-[30rem]"
