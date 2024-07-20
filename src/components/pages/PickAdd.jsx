@@ -119,7 +119,7 @@ const PickAdd = () => {
               );
             })}
 
-            <Group justify="space-between" mt={63} display={{ base: "none", md: "flex" }}>
+            <Group justify="space-between" mt={{lg:63, md: 45}} display={{ base: "none", md: "flex" }}>
               <Button variant="tertiary" onClick={() => navigate(-1)}>
                 Go Back
               </Button>

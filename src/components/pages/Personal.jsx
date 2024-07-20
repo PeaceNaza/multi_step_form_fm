@@ -136,7 +136,7 @@ const Personal = () => {
                 />
               </Box>
 
-              <Group justify="flex-end" mt={80} display={{ base: "none", md: "flex" }}>
+              <Group justify="flex-end" mt={{lg: 90, md: 70}} display={{ base: "none", md: "flex" }}>
                 <Button variant="primary">Next step</Button>
               </Group>
             </form>
