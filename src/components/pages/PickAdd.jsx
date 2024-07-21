@@ -92,7 +92,7 @@ const PickAdd = () => {
                   className={`border rounded-md shadow hover:border hover:border-primary-200 cursor-pointer  ${isSelected ? "bg-secondary-300 border border-primary-200" : ""}`}
                 >
                   <Flex grow align="center" justify="space-between">
-                    <Group grow align="flex-start">
+                    <Group align="flex-start">
                       <Checkbox
                         size={18}
                         color="hsl(243, 100%, 62%)"
