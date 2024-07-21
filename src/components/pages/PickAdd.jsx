@@ -86,6 +86,7 @@ const PickAdd = () => {
               const isSelected = selectedAddOns.includes(addOn.id);
               return (
                 <Box
+                  w="100%"
                   key={addOn.id}
                   p={10}
                   my={20}
