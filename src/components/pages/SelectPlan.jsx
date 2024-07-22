@@ -1,4 +1,4 @@
-import { Text, Grid, Image, Box, Flex, Group, Container, Title, } from "@mantine/core";
+import { Text, Grid, Image, Box, Flex, Group, Container, Title } from "@mantine/core";
 import Button from "../layouts/Buttons";
 import { useNavigate } from "react-router-dom";
 import arcade from "../../assets/images/icon-arcade.svg";

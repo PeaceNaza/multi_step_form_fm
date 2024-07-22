@@ -46,7 +46,11 @@ const Steps = () => {
       >
         {steps.map((step) => (
           <Group mt={10} key={step.button} justify="flex-start" className="rounded-md">
-            <Button variant="secondary" isActive={currentStep === step.button}>
+            <Button
+              variant="secondary"
+              isActive={currentStep === step.button}
+              isCompleted={currentStep > step.button}
+            >
               {step.button}
             </Button>
             <Box>

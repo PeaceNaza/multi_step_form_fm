@@ -86,7 +86,7 @@ const PickAdd = () => {
               const isSelected = selectedAddOns.includes(addOn.id);
               return (
                 <Box
-                  w="100%"
+                
                   key={addOn.id}
                   p={10}
                   my={20}
@@ -120,7 +120,11 @@ const PickAdd = () => {
               );
             })}
 
-            <Group justify="space-between" mt={{lg:63, md: 45}} display={{ base: "none", md: "flex" }}>
+            <Group
+              justify="space-between"
+              mt={{ lg: 63, md: 45 }}
+              display={{ base: "none", md: "flex" }}
+            >
               <Button variant="tertiary" onClick={() => navigate(-1)}>
                 Go Back
               </Button>

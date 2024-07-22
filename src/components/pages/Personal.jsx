@@ -23,7 +23,7 @@ const schema = yup.object().shape({
 
 const Personal = () => {
   const navigate = useNavigate();
-  const { personalInfo, setPersonalInfo, setCurrentStep } = useFormStore();
+  const { personalInfo, setPersonalInfo, setCurrentStep, previousStep } = useFormStore();
 
   const {
     register,
@@ -136,7 +136,11 @@ const Personal = () => {
                 />
               </Box>
 
-              <Group justify="flex-end" mt={{lg: 90, md: 70}} display={{ base: "none", md: "flex" }}>
+              <Group
+                justify="flex-end"
+                mt={{ lg: 90, md: 70 }}
+                display={{ base: "none", md: "flex" }}
+              >
                 <Button variant="primary">Next step</Button>
               </Group>
             </form>
@@ -144,14 +148,11 @@ const Personal = () => {
         </Flex>
       </Container>
 
-      <form
-        onSubmit={handleSubmit(submitForm)}
-       
-      >
+      <form onSubmit={handleSubmit(submitForm)}>
         <Group
-         className=" bg-secondary-500 mt-[30rem]"
-         h="100%"
-         w="100vw"
+          className=" bg-secondary-500 mt-[30rem]"
+          h="100%"
+          w="100vw"
           justify="flex-end"
           py={{ base: 23, md: 0 }}
           pr={{ base: 25, md: 0 }}

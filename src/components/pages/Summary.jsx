@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import useFormStore from "../formStore";
 import { useEffect } from "react";
 
-
 const Summary = () => {
   const navigate = useNavigate();
 
@@ -62,7 +61,7 @@ const Summary = () => {
     },
     {
       id: 3,
-      title: "Custom profile",
+      title: "Customizable profile",
       description: "Custom theme on your profile",
       price: "+$2/mo",
       yearly: "+$20/yr",
@@ -86,7 +85,7 @@ const Summary = () => {
       const addOnPrice = yearlyPlan ? addOn.yearly : addOn.price;
       return acc + parseInt(addOnPrice.replace("$", ""));
     },
-    parseInt(yearlyPlan ? planDetails.year.replace("$", "") : planDetails.month.replace("$", "")), 
+    parseInt(yearlyPlan ? planDetails.year.replace("$", "") : planDetails.month.replace("$", "")),
   );
 
   return (
