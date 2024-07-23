@@ -49,7 +49,7 @@ const Steps = () => {
             <Button
               variant="secondary"
               isActive={currentStep === step.button}
-              isCompleted={currentStep > step.button}
+              isCompleted={currentStep > step.button || currentStep === 4}
             >
               {step.button}
             </Button>
