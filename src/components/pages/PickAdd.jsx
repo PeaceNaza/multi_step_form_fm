@@ -58,7 +58,7 @@ const PickAdd = () => {
     <>
       <Container
         mt={{ base: 0, md: 50 }}
-        w={{ base: "90vw", md: "60vw" }}
+        w={{ base: "92vw", md: "60vw" }}
         h={{ md: "85vh" }}
         bg="hsl(0, 0%, 100%)"
         className="top  rounded-md shadow-md"
@@ -74,7 +74,7 @@ const PickAdd = () => {
             <Steps />
           </Box>
 
-          <Box w={{ base: "97%", md: "57%" }} mt={{ base: 10, md: 23 }} mb={{ base: 25, md: 23 }}>
+          <Box w={{ base: "100%", md: "57%" }} mt={{ base: 10, md: 23 }} mb={{ base: 25, md: 23 }}>
             <Title order={2} ff="Ubuntu" mb={{ base: 8, md: 2 }} fw={700}>
               Pick add-ons{" "}
             </Title>
@@ -86,7 +86,7 @@ const PickAdd = () => {
               const isSelected = selectedAddOns.includes(addOn.id);
               return (
                 <Box
-                
+                  w={{ base: "83.7vw", xs: "100%" }}
                   key={addOn.id}
                   p={10}
                   my={20}
