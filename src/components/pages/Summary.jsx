@@ -23,6 +23,7 @@ const Summary = () => {
     setYearlyPlan,
     setCurrentStep,
     setIsConfirmed,
+    resetConfirmation,
   } = useFormStore();
 
   const plans = [
@@ -72,7 +73,8 @@ const Summary = () => {
 
   useEffect(() => {
     setCurrentStep(4);
-  }, [setCurrentStep]);
+    resetConfirmation();
+  }, [setCurrentStep, resetConfirmation]);
 
   const planDetails = plans[selectedPlan];
   const addOnDetails = addOns.filter((addOn) => selectedAddOns.includes(addOn.id));
