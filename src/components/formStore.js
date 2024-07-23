@@ -25,6 +25,9 @@ const useFormStore = create(
 
         currentStep: 1,
         setCurrentStep: (step) => set({ currentStep: step }),
+
+        isConfirmed: false,
+        setIsConfirmed: (value) => set({ isConfirmed: value }),
       }),
 
       {

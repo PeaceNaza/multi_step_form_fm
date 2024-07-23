@@ -10,6 +10,7 @@ const Summary = () => {
 
   const finish = () => {
     if (window.confirm("Are you sure you want to submit?")) {
+      setIsConfirmed(true);
       navigate("/finished");
     }
   };
@@ -21,6 +22,7 @@ const Summary = () => {
     yearlyPlan,
     setYearlyPlan,
     setCurrentStep,
+    setIsConfirmed,
   } = useFormStore();
 
   const plans = [

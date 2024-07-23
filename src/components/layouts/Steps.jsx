@@ -5,7 +5,8 @@ import "../../styles/step.css";
 import useFormStore from "../formStore";
 
 const Steps = () => {
-  const { currentStep } = useFormStore();
+  const { currentStep, isConfirmed, setIsConfirmed } = useFormStore();
+
 
   const steps = [
     {
@@ -35,6 +36,10 @@ const Steps = () => {
     },
   ];
 
+  const handleConfirm = () => {
+    setIsConfirmed(true);
+  };
+
   return (
     <Box w={{ md: 210 }} h={{ base: 180, md: "80vh" }} className="sidebar md:rounded-md">
       <Flex
@@ -49,7 +54,7 @@ const Steps = () => {
             <Button
               variant="secondary"
               isActive={currentStep === step.button}
-              isCompleted={currentStep > step.button || currentStep === 4}
+              isCompleted={currentStep > step.button || (step.button === 4 && isConfirmed)}
             >
               {step.button}
             </Button>
